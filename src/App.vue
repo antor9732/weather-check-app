@@ -4,7 +4,7 @@ export default {
   data() {
     return {
       api_key: 'e8d61496ac0d1816f163083369dcef6c',
-      url_base: 'https://api.openweathermap.org/data/2.5/weather',
+      url_base: 'https://api.openweathermap.org/data/2.5/',
       query: '',
       weather: {},
 
@@ -21,6 +21,11 @@ export default {
     },
     setResults(results) {
       this.weather = results;
+    },
+    dateBuilder() {
+      let d = new Date();
+      let options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+      return d.toLocaleDateString(undefined, options);
     }
 
   }
@@ -39,16 +44,16 @@ export default {
       />
     </div>
 
-    <div class="weather-wrap">
+    <div class="weather-wrap" v-if="typeof weather.main !== 'undefined'">
       <div class="location-box">
-        <div class="location">Dhaka, Bangladesh</div>
-        <div class="date">Monday, 1st January 2024</div>
+        <div class="location">{{ weather.name }}, {{ weather.sys?.country }}</div>
+        <div class="date">{{ dateBuilder() }}</div>
       </div>
-    </div>
-
-    <div class="weather-box">
-      <div class="temp">9°C</div>
-      <div class="weather">Rain</div>
+      
+      <div class="weather-box">
+        <div class="temp">{{ Math.round(weather.main.temp) }}°C</div>
+        <div class="weather">{{ weather.weather[0].main }}</div>
+      </div>
     </div>
   </main>
 </template>
