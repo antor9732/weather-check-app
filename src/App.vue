@@ -122,9 +122,10 @@ main {
 }
 
 .location-box .date {
-  font-size: 18px;
-  font-weight: 300;
+  font-size: 16px;
+  font-weight: 200;
   color: #fff;
+  font-style: italic;
   text-align: center;
   text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
 }
